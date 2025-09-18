@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Ecomers{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+      .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+      .product-card img { width: 100%; height: 180px; object-fit: cover; }
+      header nav a { margin-right: .75rem; }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><strong><a href="/">Ecomers</a></strong></li>
+        </ul>
+        <ul>
+          <li><a href="/products/">Products</a></li>
+          <li><a href="/cart/">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="container">
+      <small>&copy; {{ now|date:'Y' }} Ecomers</small>
+    </footer>
+  </body>
+  </html>
