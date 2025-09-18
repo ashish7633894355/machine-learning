@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Django: Runserver",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "runserver",
+        "0.0.0.0:8000"
+      ],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "ecomers.settings"
+      },
+      "django": true,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Django: Migrate",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "migrate"
+      ],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "ecomers.settings"
+      },
+      "django": true,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Django: Seed",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "seed"
+      ],
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "ecomers.settings"
+      },
+      "django": true,
+      "console": "integratedTerminal"
+    }
+  ]
+}
