@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }} - Ecomers{% endblock %}
+{% block content %}
+<article>
+  <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+    <div style="flex:1; min-width:280px;">
+      {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.title }}" style="width:100%; max-width:480px; object-fit:cover;" />
+      {% else %}
+      <img src="https://picsum.photos/seed/{{ product.id }}/800/600" alt="{{ product.title }}" style="width:100%; max-width:480px; object-fit:cover;" />
+      {% endif %}
+    </div>
+    <div style="flex:1; min-width:280px;">
+      <h2>{{ product.title }}</h2>
+      <p><strong>{{ product.price_display }}</strong></p>
+      <p>{{ product.description|default:'No description.' }}</p>
+      <form action="{% url 'cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add to cart</button>
+      </form>
+    </div>
+  </div>
+  <p><a href="/products/">Back to products</a></p>
+{% endblock %}

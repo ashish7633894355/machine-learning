@@ -1,0 +1,4 @@
+Django==5.1.*
+dj-database-url==2.*
+whitenoise==6.*
+Pillow==10.*

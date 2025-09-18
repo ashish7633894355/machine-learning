@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Products - Ecomers{% endblock %}
+{% block content %}
+<h2>Products</h2>
+<details open>
+  <summary>Filter by category</summary>
+  <nav>
+    <a href="/products/" {% if not active_category %}aria-current="page"{% endif %}>All</a>
+    {% for cat in categories %}
+    <a href="/products/?category={{ cat.slug }}" {% if active_category and active_category.id == cat.id %}aria-current="page"{% endif %}>{{ cat.name }}</a>
+    {% endfor %}
+  </nav>
+  <hr />
+</details>
+
+<div class="product-grid">
+  {% for product in products %}
+  <article class="product-card">
+    <a href="{% url 'product_detail' product.slug %}">
+      {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.title }}" />
+      {% else %}
+      <img src="https://picsum.photos/seed/{{ product.id }}/400/300" alt="{{ product.title }}" />
+      {% endif %}
+    </a>
+    <h3><a href="{% url 'product_detail' product.slug %}">{{ product.title }}</a></h3>
+    <p>{{ product.price_display }}</p>
+    <form action="{% url 'cart_add' product.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Add to cart</button>
+    </form>
+  </article>
+  {% empty %}
+  <p>No products found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

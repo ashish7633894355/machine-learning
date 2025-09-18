@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Cart - Ecomers{% endblock %}
+{% block content %}
+<h2>Your cart</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Qty</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td><a href="{% url 'product_detail' item.product.slug %}">{{ item.product.title }}</a></td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.line_total_display }}</td>
+      <td>
+        <form action="{% url 'cart_remove' item.product.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="secondary">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Your cart is empty.</td></tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2" style="text-align:right;">Subtotal:</th>
+      <th>{{ subtotal_display }}</th>
+      <th></th>
+    </tr>
+  </tfoot>
+</table>
+
+<p>
+  {% if items %}
+  <a href="/checkout/" role="button">Proceed to checkout</a>
+  {% endif %}
+  <a href="/products/" role="button" class="secondary">Continue shopping</a>
+{% endblock %}
